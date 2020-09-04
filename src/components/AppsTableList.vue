@@ -1,0 +1,123 @@
+<script lang="ts">
+import { defineComponent } from '@vue/composition-api';
+import { f7List, f7ListItem, f7Button } from 'framework7-vue';
+
+export default defineComponent({
+  name: 'apps-table-list',
+  props: {
+    apps: { type: Array, required: false },
+    backText: { type: Object, required: false, default: () => ({}) },
+  },
+  components: { f7List, f7ListItem, f7Button },
+});
+</script>
+<template>
+<f7-list class="apps-table-list" noChevron noHairlines>
+  <f7-list-item
+    v-for="app in apps"
+    v-bind:key="app.id"
+    :link="`/app/${app.id}`"
+    :routeProps="backText" >
+      <div class="apps-table-list-title" slot="title">{{app.title}}</div>
+      <div class="apps-table-list-subtitle item-text" slot="title">{{app.subtitle}}</div>
+      <img loading="lazy"
+        class="apps-table-list-image" slot="media"
+        :src="app.icon" :alt="app.title" />
+      <div class="apps-table-list-button" slot="inner">
+        <f7-button class="prevent-active-state-propagation" type="button" round>Get</f7-button>
+        <span>In-App Purchases</span>
+      </div>
+  </f7-list-item>
+</f7-list>
+</template>
+<style lang="less" scoped>
+.apps-table-list {
+  --f7-list-bg-color: transparent;
+  --f7-list-item-title-white-space: normal;
+  --f7-list-item-text-max-lines: 1;
+  --f7-list-item-text-font-size: 13px;
+  --f7-list-link-pressed-bg-color: transparent;
+  --f7-list-item-title-line-height: 1.2;
+  .item-link .item-inner {
+    padding-right: 0;
+  }
+  .item-content {
+    padding-left: 0px;
+  }
+  ul {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    height: 78px * 3px;
+    flex-wrap: wrap;
+    overflow: auto;
+    padding-left: calc(var(--f7-safe-area-left) + var(--f7-list-item-padding-horizontal));
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
+      opacity: 0;
+    }
+    @media (min-width: 768px) {
+      scroll-padding-left: calc(20px + var(--f7-safe-area-left));
+    }
+  }
+  li {
+    width: calc(100% - 20px);
+    max-width: 350px;
+    margin-right: 10px;
+    scroll-snap-align: center center;
+    @media (min-width: 768px) {
+      margin-right: 24px;
+      scroll-snap-align: start start;
+    }
+    &:nth-child(3n) .item-inner:after {
+      display: none;
+    }
+  }
+  &.list ul:after {
+    content: '' !important;
+    width: calc(var(--f7-safe-area-right) + var(--f7-list-item-padding-horizontal));
+    height: 1px;
+    display: block !important;
+    position: static;
+    transform: none;
+    height: 78px * 3px;
+    background: transparent;
+  }
+  &-title {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    position: relative;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  &-image {
+    width: 62px;
+    height: 62px;
+    border-radius: 21%;
+    background: #ccc;
+  }
+  &-button {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: var(--f7-list-item-padding-horizontal);
+    --f7-button-bg-color: rgba(0,0,0,0.07);
+    --f7-button-pressed-bg-color: rgba(0,0,0,0.4);
+    .theme-dark & {
+      --f7-button-bg-color: rgba(255,255,255,0.11);
+      --f7-button-pressed-bg-color: rgba(255,255,255,0.075);
+    }
+    span {
+      margin-top: 4px;
+      font-size: 8px;
+      display: block;
+      color: var(--f7-list-item-text-text-color);
+    }
+  }
+}
+</style>

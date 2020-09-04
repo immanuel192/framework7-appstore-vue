@@ -1,0 +1,295 @@
+<script lang="ts">
+import { computed, defineComponent } from '@vue/composition-api';
+import { f7Card, f7CardContent } from 'framework7-vue';
+import AppsTableList from './AppsTableList.vue';
+
+export default defineComponent({
+  name: 'appstore-card',
+  components: {
+    f7Card,
+    f7CardContent,
+    AppsTableList,
+  },
+  props: {
+    image: String,
+    app: { type: Object, required: false },
+    children: { type: Object, required: false },
+    imageAlt: { type: String, required: false, default: '' },
+    title: { type: String, required: false, default: '' },
+    titleColor: { type: String, required: false, default: '#000' },
+    subtitle: { type: String, required: false, default: '' },
+    subtitleColor: { type: String, required: false, default: '#000' },
+    titleLarge: { type: Boolean, required: false, default: false },
+    titlePosition: { type: String, required: false, default: 'top' },
+    appColor: { type: String, required: false, default: '#fff' },
+    closeButtonColor: { type: String, required: false, default: '#fff' },
+  },
+  setup(props) {
+    const titleStyle = {
+      color: computed(() => props.titleColor),
+    };
+    if (props.titleLarge) {
+      Object.assign(titleStyle, {
+        fontSize: '44px',
+        fontWeight: 800,
+        lineHeight: 1,
+      });
+    }
+
+    return {
+      titleStyle,
+    };
+  },
+});
+</script>
+<template>
+  <f7-card expandable class="appstore-card">
+    <f7-card-content :padding="false">
+      <div
+        class="appstore-card-header"
+        v-bind:class="[`appstore-card-header-text-${titlePosition}`]"
+        >
+        <img :src="image" :alt="imageAlt" />
+        <div class="appstore-card-header-text">
+          <div class="appstore-card-subtitle" v-bind:style="{color: subtitleColor}">
+            {{subtitle}}
+          </div>
+          <div class="appstore-card-title" v-bind:style="titleStyle" v-html="title">
+          </div>
+          </div>
+          <apps-table-list
+            v-if="app" v-bind:style="{color: appColor}"
+            :apps="[app]" />
+      </div>
+      <div class="appstore-card-close-button card-opened-fade-in">
+        <a href="#" class="link card-close">
+          <i
+            v-bind:style="{ color: closeButtonColor }" class="f7-icons">multiply_circle_fill</i>
+        </a>
+      </div>
+      <div class="appstore-card-content card-content-padding">
+          <slot></slot>
+      </div>
+    </f7-card-content>
+  </f7-card>
+</template>
+
+<style lang="less">
+.card-backdrop {
+  .device-desktop & {
+    backdrop-filter: none;
+    background-color: rgba(255, 255, 255, 0.55);
+  }
+  .device-desktop.theme-dark & {
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+}
+.appstore-card-grid {
+  @media (min-width: 768px) and (min-height: 670px) {
+    --card-grid-gap: 30px;
+    --cards-per-row: 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: var(--card-grid-gap);
+    row-gap: var(--card-grid-gap);
+    margin-left: calc(var(--f7-card-expandable-margin-horizontal) + var(--f7-safe-area-left));
+    margin-right: calc(var(--f7-card-expandable-margin-horizontal) + var(--f7-safe-area-right));
+    margin-top: var(--f7-card-expandable-margin-vertical);
+    margin-bottom: var(--card-grid-gap);
+    .appstore-card {
+      margin: 0;
+      // max-width: none;
+      width: 100%;
+    }
+  }
+  @media (min-width: 1024px) {
+    --card-grid-gap: 50px;
+  }
+  @media (min-width: 1500px) {
+    --card-grid-gap: 50px;
+    --cards-per-row: 3;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+}
+.appstore-card {
+  height: 410px;
+  max-height: 100vh;
+  --f7-card-content-padding-horizontal: 20px;
+  --f7-card-content-padding-vertical: 30px;
+  --f7-card-expandable-font-size: 20px;
+  --f7-card-expandable-font-weight: 500;
+  --f7-card-expandable-max-width: none;
+  --f7-card-expandable-tablet-height: 92vh;
+  --f7-card-expandable-tablet-border-radius: 13px;
+  --card-offset: calc(40px + var(--f7-safe-area-left) + var(--f7-safe-area-right));
+  --card-width: calc(100% - var(--f7-safe-area-left) - var(--f7-safe-area-right) - 40px);
+
+  @media (max-width: 767px), (max-height: 669px) {
+    margin-top: 0;
+  }
+  @media (min-width: 768px) and (min-height: 670px) {
+    --card-width: calc((100vw - var(--f7-safe-area-left) - var(--f7-safe-area-right) - var(--f7-card-expandable-margin-horizontal) * 2 - var(--card-grid-gap) * (var(--cards-per-row) - 1)) / var(--cards-per-row));
+    --card-offset: calc(670px - var(--card-width));
+    .card-content {
+      --f7-safe-area-left: 0px;
+      --f7-safe-area-right: 0px;
+      --f7-card-content-padding-horizontal: 35px;
+    }
+  }
+  .theme-dark & {
+    --f7-card-expandable-box-shadow: none;
+  }
+
+  &.card-opening,
+  &.card-closing,
+  &.card-transitioning {
+    transition-duration: 300ms;
+  }
+  &.card-opening {
+    .card-content {
+      transition-duration: 350ms;
+    }
+  }
+  &.card-closing {
+    .card-content {
+      transition-duration: 400ms;
+    }
+  }
+
+  &-close-button {
+    position: absolute;
+    top: calc(16px + var(--f7-safe-area-top));
+    right: calc(var(--f7-card-content-padding-horizontal) + var(--f7-safe-area-right));
+  }
+
+  &-header {
+    height: 410px;
+    max-height: 100vh;
+    position: relative;
+
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+
+    > img {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      z-index: -1;
+      background-color: #ccc;
+      transform: translateX(calc(-1 * var(--card-offset) / 2));
+    }
+    &-text {
+      padding: 16px var(--f7-card-content-padding-horizontal);
+      width: 100%;
+      box-sizing: border-box;
+      transform: translate3d(0,0,0);
+    }
+    &-text-top &-text{
+      margin-bottom: auto;
+    }
+    .apps-table-list {
+      padding: 16px var(--f7-card-content-padding-horizontal);
+      display: block;
+      backdrop-filter: blur(30px) saturate(210%);
+      margin-top: 0;
+      width: 100%;
+      box-sizing: border-box;
+      color: #fff;
+      position: relative;
+      z-index: 10;
+      --f7-list-item-text-text-color: rgba(255, 255, 255, 0.55);
+      --f7-list-item-padding-vertical: 0px;
+      &-button {
+        transform: translateX(calc(-1 * var(--card-offset)));
+      }
+      .button {
+        --f7-button-bg-color: #fff;
+      }
+      ul {
+        padding: 0;
+        display: block;
+        height: unset;
+        flex-shrink: 0;
+        max-width: none;
+        &:after {
+          display: none !important;
+        }
+      }
+      li {
+        max-width: none;
+        width: auto;
+        padding: 0;
+        margin: 0;
+      }
+      &-title {
+        margin-right: 20px;
+        -webkit-line-clamp: 1;
+        color: inherit;
+      }
+      &-button span,
+      .item-text {
+        color: inherit;
+        opacity: 0.55;
+      }
+      &-image {
+        width: 48px;
+        height: 48px;
+      }
+    }
+  }
+  &.card-opened, &.card-opening {
+    .appstore-card-header .apps-table-list-button,
+    .appstore-card-header > img {
+      transform: translateX(0);
+    }
+  }
+  &.card-opening,
+  &.card-closing {
+    .appstore-card-header .apps-table-list-button,
+    .appstore-card-header > img,
+    .appstore-card-header-text,
+    .appstore-card-close-button {
+      transition-duration: 400ms;
+    }
+  }
+
+  &.card-opened .appstore-card-header-text-top .appstore-card-header-text,
+  &.card-opening .appstore-card-header-text-top .appstore-card-header-text {
+    transform: translateY(var(--f7-safe-area-top));
+  }
+  &-subtitle {
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: 600;
+    opacity: 0.55;
+  }
+  &-title {
+    font-size: 28px;
+    font-weight: bold;
+    max-width: calc(var(--card-width) * 0.8);
+    line-height: 1.2;
+  }
+
+  &-content {
+    color: rgba(0, 0, 0, 0.55);
+    font-weight: 500;
+    b, strong, em, h1, h2, h3, h4 {
+      color: #000;
+    }
+    .theme-dark & {
+      color: rgba(240, 240, 255, 0.55);
+      b, strong, em, h1, h2, h3, h4 {
+        color: #fff;
+      }
+    }
+  }
+}
+</style>
