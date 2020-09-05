@@ -19,20 +19,20 @@ const routes = [
   //   path: '/search/',
   //   component: Search,
   // },
-  // {
-  //   path: '/app/:id',
-  //   asyncComponent: () => import(/* webpackChunkName: "app-details" *//* webpackPreload: true */ '@/views/AppDetails.vue'),
-  // },
-  // {
-  //   path: '/account/',
-  //   popup: {
-  //     asyncComponent: () => import(/* webpackChunkName: "account" *//* webpackPreload: true */ '@/views/Account.vue'),
-  //   },
-  // },
-  // {
-  //   path: '(.*)',
-  //   asyncComponent: () => import(/* webpackChunkName: "404" */ '@/views/404.vue'),
-  // },
+  {
+    path: '/app/:id',
+    asyncComponent: () => import(/* webpackChunkName: "app-details" *//* webpackPreload: true */ '@/views/AppDetails.vue'),
+  },
+  {
+    path: '/account/',
+    popup: {
+      asyncComponent: () => import(/* webpackChunkName: "account" *//* webpackPreload: true */ '@/views/Account.vue'),
+    },
+  },
+  {
+    path: '(.*)',
+    asyncComponent: () => import(/* webpackChunkName: "404" */ '@/views/404.vue'),
+  },
 ];
 
 export default routes;
