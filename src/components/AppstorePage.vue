@@ -20,7 +20,7 @@ export default defineComponent({
     noCollapsedNavbar: {
       type: Boolean,
       required: false,
-      default: false,
+      default: true,
     },
   },
 });
