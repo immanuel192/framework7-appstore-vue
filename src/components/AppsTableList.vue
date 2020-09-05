@@ -6,7 +6,7 @@ export default defineComponent({
   name: 'apps-table-list',
   props: {
     apps: { type: Array, required: false },
-    backText: { type: Object, required: false, default: () => ({}) },
+    backText: { type: String, required: false, default: '' },
   },
   components: { f7List, f7ListItem, f7Button },
 });
@@ -17,7 +17,7 @@ export default defineComponent({
     v-for="app in apps"
     v-bind:key="app.id"
     :link="`/app/${app.id}`"
-    :routeProps="backText" >
+    :routeProps="{ backText }" >
       <div class="apps-table-list-title" slot="title">{{app.title}}</div>
       <div class="apps-table-list-subtitle item-text" slot="title">{{app.subtitle}}</div>
       <img loading="lazy"
@@ -30,7 +30,7 @@ export default defineComponent({
   </f7-list-item>
 </f7-list>
 </template>
-<style lang="less" scoped>
+<style lang="less">
 .apps-table-list {
   --f7-list-bg-color: transparent;
   --f7-list-item-title-white-space: normal;

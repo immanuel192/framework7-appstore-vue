@@ -51,7 +51,7 @@ export default defineComponent({
       if (previousTab.value !== activeTab.value) return;
       if (activeTab.value === tab) {
         /** @todo need to update */
-        refs[tab].$f7.views.main.router.back();
+        // refs[tab].$f7.views.main.router.back();
         // (refs[tab] as any).$f7.router.back();
         // $(`#view-${tab}`)[0].f7View.router.back();
       }

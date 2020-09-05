@@ -22,10 +22,6 @@ export default defineComponent({
       required: false,
       default: false,
     },
-    children: {
-      type: Object,
-      required: false,
-    },
   },
 });
 </script>

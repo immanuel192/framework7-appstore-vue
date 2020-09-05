@@ -12,7 +12,7 @@
     "@vue/composition-api": "^1.0.0-beta.10",
     "framework7": "^5.7.11",
     "framework7-icons": "^3.0.1",
-    "framework7-vue": "^5.7.11",
+    "framework7-vue": "^5.7.12",
     "lodash": "^4.17.20",
     "register-service-worker": "^1.7.1",
     "vue": "^2.6.12"
