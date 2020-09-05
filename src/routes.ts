@@ -7,10 +7,10 @@ const routes = [
     path: '/games/',
     asyncComponent: () => import(/* webpackChunkName: "app-games" *//* webpackPreload: true */ '@/views/Games.vue'),
   },
-  // {
-  //   path: '/apps/',
-  //   component: Apps,
-  // },
+  {
+    path: '/apps/',
+    asyncComponent: () => import(/* webpackChunkName: "app-apps" *//* webpackPreload: true */ '@/views/Apps.vue'),
+  },
   // {
   //   path: '/arcade/',
   //   component: Arcade,
