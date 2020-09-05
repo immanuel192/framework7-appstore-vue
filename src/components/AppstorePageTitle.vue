@@ -14,10 +14,7 @@ export default defineComponent({
 </script>
 <template>
   <h1 class="appstore-page-title">
-    <div
-      class="appstore-page-title-heading"
-      v-if="heading"
-    >{{heading}}</div>
+    <div class="appstore-page-title-heading" v-if="heading" >{{heading}}</div>
     <span>{{title}}</span>
      <f7-link href="/account/" v-if="accountLink">
       <img src="/avatar.jpg" alt="Account" />

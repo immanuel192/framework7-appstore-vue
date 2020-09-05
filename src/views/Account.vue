@@ -59,7 +59,7 @@ export default defineComponent({
           <f7-list-button>Add Funds to Apple ID</f7-list-button>
         </f7-list>
         <f7-list>
-          <f7-listitem
+          <f7-list-item
             title="Personalised Recommendations"
             link
           />

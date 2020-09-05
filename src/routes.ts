@@ -11,10 +11,10 @@ const routes = [
     path: '/apps/',
     asyncComponent: () => import(/* webpackChunkName: "app-apps" *//* webpackPreload: true */ '@/views/Apps.vue'),
   },
-  // {
-  //   path: '/arcade/',
-  //   component: Arcade,
-  // },
+  {
+    path: '/arcade/',
+    asyncComponent: () => import(/* webpackChunkName: "app-arcade" *//* webpackPreload: true */ '@/views/Arcade.vue'),
+  },
   {
     path: '/search/',
     asyncComponent: () => import(/* webpackChunkName: "app-search" *//* webpackPreload: true */ '@/views/Search.vue'),

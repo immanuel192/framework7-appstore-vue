@@ -34,12 +34,12 @@ export default defineComponent({
         class="appstore-page-large-navbar"
         v-bind:class="{ 'appstore-page-no-collapsed-navbar': noCollapsedNavbar }"
         large transparent :title="title" />
-        <appstore-page-title v-if="title" :title="title" :heading="navbarHeading"  />
+        <appstore-page-title v-if="title" :title="title" :heading="navbarHeading"   />
       <slot></slot>
     </f7-page>
 </template>
 
-<style lang="less" scoped>
+<style lang="less">
 .appstore-page-large-navbar {
   &:not(.router-navbar-transition-from-large) .title-large {
     opacity: 0;
