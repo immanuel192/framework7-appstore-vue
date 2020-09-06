@@ -13,15 +13,11 @@
     "framework7": "^5.7.11",
     "framework7-icons": "^3.0.1",
     "framework7-vue": "^5.7.12",
-    "lodash": "^4.17.20",
     "register-service-worker": "^1.7.1",
     "vue": "^2.6.12"
   },
   "devDependencies": {
-    "@types/jest": "^26.0.10",
     "@types/node": "12.12.53",
-    "@types/chance": "^1.1.0",
-    "@types/lodash": "^4.14.161",
     "@typescript-eslint/eslint-plugin": "^2.33.0",
     "@typescript-eslint/parser": "^2.33.0",
     "@vue/cli-plugin-typescript": "~4.4.0",
