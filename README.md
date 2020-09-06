@@ -1,5 +1,5 @@
-# framwork7-appstore-vue
-Credit: https://github.com/framework7io/framework7-appstore-react
+# framework7-appstore-vue
+This is Vuejs version (Vue2 + Vue/Composition-api) of https://github.com/framework7io/framework7-appstore-react
 
 ## Project setup
 ```
@@ -26,5 +26,3 @@ npm run test:unit
 npm run lint
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
