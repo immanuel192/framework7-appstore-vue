@@ -135,6 +135,3 @@ export default defineComponent({
       </div>
     </appstore-page>
 </template>
-
-<style lang="less" scoped>
-</style>

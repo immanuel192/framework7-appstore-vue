@@ -26,7 +26,7 @@ export default defineComponent({
   },
   setup(props) {
     const titleStyle = {
-      color: computed(() => props.titleColor),
+      color: props.titleColor,
     };
     if (props.titleLarge) {
       Object.assign(titleStyle, {
@@ -47,24 +47,24 @@ export default defineComponent({
     <f7-card-content :padding="false">
       <div
         class="appstore-card-header"
-        v-bind:class="[`appstore-card-header-text-${titlePosition}`]"
+        :class="[`appstore-card-header-text-${titlePosition}`]"
         >
         <img :src="image" :alt="imageAlt" />
         <div class="appstore-card-header-text">
-          <div class="appstore-card-subtitle" v-bind:style="{color: subtitleColor}">
+          <div class="appstore-card-subtitle" :style="{color: subtitleColor}">
             {{subtitle}}
           </div>
-          <div class="appstore-card-title" v-bind:style="titleStyle" v-html="title">
+          <div class="appstore-card-title" :style="titleStyle" v-html="title">
           </div>
-          </div>
-          <apps-table-list
-            v-if="app" v-bind:style="{color: appColor}"
+        </div>
+        <apps-table-list
+            v-if="app" :style="{color: appColor}"
             :apps="[app]" />
       </div>
       <div class="appstore-card-close-button card-opened-fade-in">
         <a href="#" class="link card-close">
           <i
-            v-bind:style="{ color: closeButtonColor }" class="f7-icons">multiply_circle_fill</i>
+            :style="{ color: closeButtonColor }" class="f7-icons">multiply_circle_fill</i>
         </a>
       </div>
       <div class="appstore-card-content card-content-padding">
@@ -216,7 +216,7 @@ export default defineComponent({
       ul {
         padding: 0;
         display: block;
-        height: unset;
+        height: 48px;
         flex-shrink: 0;
         max-width: none;
         &:after {
